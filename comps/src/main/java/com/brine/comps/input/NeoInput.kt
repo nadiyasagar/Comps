@@ -48,6 +48,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -86,23 +87,30 @@ fun NeoTextField(
                     shadowOffset = 3.dp,
                     shape = shape
                 )
-                .padding(horizontal = 16.dp, vertical = 12.dp)
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+            contentAlignment = Alignment.CenterStart
         ) {
             if (value.isEmpty() && placeholder.isNotEmpty()) {
                 Text(
                     text = placeholder,
                     color = NeoTheme.colors.textSecondary,
-                    fontSize = 15.sp
+                    style = TextStyle(
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Medium,
+                        lineHeight = 24.sp
+                    )
                 )
             }
             BasicTextField(
                 value = value,
                 onValueChange = onValueChange,
                 singleLine = singleLine,
+                cursorBrush = SolidColor(NeoTheme.colors.red),
                 textStyle = TextStyle(
                     color = NeoTheme.colors.textPrimary,
                     fontSize = 15.sp,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.Medium,
+                    lineHeight = 24.sp
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
@@ -116,7 +124,8 @@ fun NeoOutlinedTextField(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     label: String? = null,
-    placeholder: String = ""
+    placeholder: String = "",
+    containerColor: Color = Color.Transparent
 ) {
     OutlinedTextField(
         value = value,
@@ -128,8 +137,8 @@ fun NeoOutlinedTextField(
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = NeoTheme.colors.border,
             unfocusedBorderColor = NeoTheme.colors.border,
-            focusedContainerColor = NeoTheme.colors.surface,
-            unfocusedContainerColor = NeoTheme.colors.surface,
+            focusedContainerColor = containerColor,
+            unfocusedContainerColor = containerColor,
             focusedLabelColor = NeoTheme.colors.red,
             unfocusedLabelColor = NeoTheme.colors.textSecondary
         )
