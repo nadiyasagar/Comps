@@ -23,7 +23,10 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Comps"
-include(":app")
+
+if (file("app").exists()) {
+    include(":app")
+}
 include(":comps")
 
  
