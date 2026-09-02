@@ -23,24 +23,25 @@ dependencies {
 
 ---
 
-### Option B: Publish & Import via Maven / JitPack
+### Option B: Import via JitPack
 
-To publish `:comps` to your local Maven repository:
-
-```bash
-./gradlew :comps:publishToMavenLocal
-```
-
-Then add to your `build.gradle.kts`:
+Add the JitPack repository to your root `settings.gradle.kts`:
 
 ```kotlin
-repositories {
-    mavenLocal()
-    // or maven { url = URI("https://jitpack.io") }
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+    }
 }
+```
 
+Then add the dependency to your app module's `build.gradle.kts`:
+
+```kotlin
 dependencies {
-    implementation("com.github.brine:comps:1.0.0")
+    implementation("com.github.nadiyasagar:Comps:1.0.1")
 }
 ```
 
